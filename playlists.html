@@ -7,17 +7,38 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header>
-    <h1>Music Discovery</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="playlists.html">Playlists</a>
-      <a href="history.html">History</a>
-    </nav>
-  </header>
+  <h1>Your Playlists</h1>
 
-  <main>
+  <h2>Create a Playlist</h2>
+  <form action="#" method="get" id="playlist-form">
+    <label for="playlist-name">Playlist name:</label>
+    <input type="text" id="playlist-name" placeholder="Enter a playlist name">
+    <button type="submit">Create</button>
+  </form>
 
-  </main>
+  <h2>Playlists Created</h2>
+  <div id="playlist-list">
+
+    <div class="playlist">
+      <div class="playlist-image"></div>
+      <h3>Study Songs</h3>
+      <p>5 songs</p>
+    </div>
+
+    <div class="playlist">
+      <div class="playlist-image"></div>
+      <h3>Workout</h3>
+      <p>8 songs</p>
+    </div>
+
+    <div class="playlist">
+      <div class="playlist-image"></div>
+      <h3>Road Trip</h3>
+      <p>12 songs</p>
+    </div>
+
+  </div>
+
+  <p><a href="index.html">Back to home</a></p>
 </body>
 </html>
