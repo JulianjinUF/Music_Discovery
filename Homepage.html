@@ -1,33 +1,339 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Music Discovery</title>
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-  <body>
-        <h1>Search for Music here</h1>
-        <form action="https://www.youtube.com/results" method="get">
-            <input type="text" name="search_query" placeholder="Enter song or artist">
-            <button type="submit">Search</button>
-        </form>
-        <h2>Top Songs</h2>
-        <ul>
-            <li><a href="/song/1">Song 1</a></li>
-            <li><a href="/song/2">Song 2</a></li>
-            <li><a href="/song/3">Song 3</a></li>
-        </ul>
-  <h2>Recently Played Playlist</h2>
-  <div id="recent-playlist">
-    <div class="playlist">
-      <div class="playlist-image"></div>
-      <h3><a href="playlists.html">Study Songs</a></h3>
-      <p>5 songs</p>
-    </div>
-  </div>
+    <title>Music Search</title>
 
-  </div>
-    <p><a href="playlist.html"> Go to your playlists</a></p>
-    </body>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        input {
+            flex: 1;
+            padding: 12px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px 20px;
+            cursor: pointer;
+        }
+
+        .video {
+            display: flex;
+            gap: 20px;
+            padding: 15px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .video img {
+            width: 200px;
+            height: 112px;
+            object-fit: cover;
+        }
+
+        .video h3 {
+            margin-top: 0;
+        }
+
+        .video a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .video a:hover {
+            text-decoration: underline;
+        }
+
+        .video button {
+            margin-top: 10px;
+        }
+
+        #player {
+            margin-top: 30px;
+        }
+
+        #player iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🎵 Music Search</h1>
+
+
+    <!-- SEARCH -->
+    <form id="searchForm">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Enter song or artist"
+        >
+
+        <button type="submit">
+            Search
+        </button>
+
+    </form>
+
+
+    <!-- VIDEO PLAYER -->
+    <div id="player"></div>
+
+
+    <!-- SEARCH RESULTS -->
+    <h2>Search Results</h2>
+
+    <div id="searchResults"></div>
+
+
+    <!-- TRENDING -->
+    <h2>🔥 Top 3 Trending</h2>
+
+    <div id="trendingSongs">
+        Loading...
+    </div>
+
+
+    <script>
+
+        // ==========================================
+        // PUT YOUR YOUTUBE API KEY HERE
+        // ==========================================
+
+        const API_KEY = "AIzaSyDH-7VY0EwFagPr-vxnVvxF3ICsYdJJ7Wc";
+
+
+        // ==========================================
+        // SEARCH YOUTUBE
+        // ==========================================
+
+        document
+            .getElementById("searchForm")
+            .addEventListener("submit", function(event) {
+
+                event.preventDefault();
+
+                const query =
+                    document.getElementById("searchInput").value.trim();
+
+
+                if (query === "") {
+                    return;
+                }
+
+
+                searchYouTube(query);
+
+            });
+
+
+        async function searchYouTube(query) {
+
+            const results =
+                document.getElementById("searchResults");
+
+            results.innerHTML = "<p>Searching...</p>";
+
+
+            const url =
+                "https://www.googleapis.com/youtube/v3/search" +
+                "?part=snippet" +
+                "&q=" + encodeURIComponent(query) +
+                "&type=video" +
+                "&maxResults=10" +
+                "&key=" + API_KEY;
+
+
+            try {
+
+                const response = await fetch(url);
+
+                const data = await response.json();
+
+
+                results.innerHTML = "";
+
+
+                if (!data.items || data.items.length === 0) {
+
+                    results.innerHTML =
+                        "<p>No videos found.</p>";
+
+                    return;
+                }
+
+
+                data.items.forEach(video => {
+
+                    const videoId =
+                        video.id.videoId;
+
+                    const title =
+                        video.snippet.title;
+
+                    const channel =
+                        video.snippet.channelTitle;
+
+                    const thumbnail =
+                        video.snippet.thumbnails.medium.url;
+
+
+                    const videoElement =
+                        document.createElement("div");
+
+
+                    videoElement.className = "video";
+
+
+                    videoElement.innerHTML = `
+
+                        <img src="${thumbnail}">
+
+                        <div>
+
+                            <h3>${title}</h3>
+
+                            <p>${channel}</p>
+
+                            <button
+                                onclick="playVideo('${videoId}')"
+                            >
+                                ▶ Play
+                            </button>
+
+                        </div>
+
+                    `;
+
+                    results.appendChild(videoElement);
+
+                });
+
+            }
+
+            catch (error) {
+
+                console.error(error);
+
+                results.innerHTML =
+                    "<p>Something went wrong.</p>";
+
+            }
+        }
+
+        // ==========================================
+        // PLAY VIDEO ON YOUR WEBSITE
+        // ==========================================
+
+        function playVideo(videoId) {
+
+            const player =
+                document.getElementById("player");
+
+            player.innerHTML = `
+
+                <iframe
+                    src="https://www.youtube.com/embed/${videoId}"
+                    allowfullscreen>
+                </iframe>
+            `;
+
+            // Scroll to the player
+            player.scrollIntoView({
+                behavior: "smooth"
+            });
+
+        }
+
+        // ==========================================
+        // GET TRENDING VIDEOS
+        // ==========================================
+
+        async function getTrendingSongs() {
+
+            const url =
+                "https://www.googleapis.com/youtube/v3/videos" +
+                "?part=snippet" +
+                "&chart=mostPopular" +
+                "&regionCode=US" +
+                "&maxResults=3" +
+                "&key=" + API_KEY;
+
+            try {
+
+                const response =
+                    await fetch(url);
+
+                const data =
+                    await response.json();
+
+                const container =
+                    document.getElementById("trendingSongs");
+
+                container.innerHTML = "";
+
+                data.items.forEach(video => {
+
+                    const videoId =
+                        video.id;
+
+                    const title =
+                        video.snippet.title;
+
+                    const channel =
+                        video.snippet.channelTitle;
+
+                    const thumbnail =
+                        video.snippet.thumbnails.medium.url;
+
+                    const videoElement =
+                        document.createElement("div");
+
+                    videoElement.className = "video";
+
+                    videoElement.innerHTML = `
+                        <img src="${thumbnail}">
+                        <div>
+                            <h3>${title}</h3>
+                            <p>${channel}</p>
+                            <button
+                                onclick="playVideo('${videoId}')"
+                            >
+                                ▶ Play
+                            </button>
+                        </div>
+                    `;
+                    container.appendChild(videoElement);
+                });
+            }
+            catch (error) {
+                console.error(error);
+
+                document.getElementById("trendingSongs").innerHTML =
+                    "Could not load trending videos.";
+            }
+        }
+        // Load trending videos when page opens
+        getTrendingSongs();
+    </script>
+</body>
 </html>
