@@ -1,44 +1,87 @@
+/* basic page */
 body {
   background-color: #153e7e;
   color: white;
   font-family: Arial, sans-serif;
-  margin: 0;
+  max-width: 900px;
+  margin: 0 auto;
   padding: 20px;
+  line-height: 1.5;
+}
+
+h1 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+h2 {
+  margin-top: 35px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid #2a5aa8;
 }
 
 a {
   color: #9ec5ff;
 }
 
+/* nav bar */
+nav {
+  background-color: #0f2f61;
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+}
+
 nav a {
-  margin-right: 15px;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  margin-right: 20px;
 }
 
-input {
-  padding: 8px;
+nav a:hover {
+  text-decoration: underline;
 }
 
-button {
-  padding: 8px 12px;
-  cursor: pointer;
+/* forms */
+form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
 }
 
 label {
   margin-right: 8px;
 }
 
-form{
-  display: flex;
-  gap: 10px;
-  margin-bottom: 30px;
+input {
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
 }
 
-input[type="text"]{
+input[type="text"] {
   flex: 1;
 }
-/* for the playlist */
+
+button {
+  background-color: #2a64c5;
+  color: white;
+  padding: 10px 16px;
+  font-size: 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #3a78e0;
+}
+
+/* playlists */
 #playlist-list,
-#recent-playlist{
+#recent-playlist {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -59,48 +102,68 @@ input[type="text"]{
   border-radius: 6px;
   margin-bottom: 10px;
 }
+
+.playlist h3 {
+  margin: 0 0 5px 0;
+}
+
 .playlist h3 a {
   color: white;
   text-decoration: none;
 }
 
-/* the history */
+.playlist p {
+  margin: 0;
+  color: #cfe0ff;
+}
+
+/* history */
 #history-preview,
 #history-list {
+  background-color: #1d4f9e;
+  border-radius: 8px;
+  padding: 15px 15px 15px 45px;
   line-height: 2;
-  padding-left: 30px;
 }
 
 .button-link {
   display: inline-block;
-  background-color: #1d4f9e;
+  background-color: #2a64c5;
   color: white;
-  padding: 8px 14px;
+  padding: 10px 16px;
   border-radius: 6px;
   text-decoration: none;
+  margin-top: 10px;
   margin-bottom: 20px;
 }
 
 .button-link:hover {
-  background-color: #2a64c5;
+  background-color: #3a78e0;
 }
-  
-/* search results and trending (from the partner's page) */
+
+/* search results and trending */
 .video {
   display: flex;
   gap: 20px;
-  padding: 15px 0;
-  border-bottom: 1px solid #2a5aa8;
+  background-color: #1d4f9e;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
 }
 
 .video img {
   width: 200px;
   height: 112px;
   object-fit: cover;
+  border-radius: 6px;
 }
 
 .video h3 {
   margin-top: 0;
+}
+
+.video p {
+  color: #cfe0ff;
 }
 
 #player {
@@ -111,10 +174,17 @@ input[type="text"]{
   width: 100%;
   height: 450px;
   border: none;
+  border-radius: 8px;
 }
 
+/* small screens */
+@media (max-width: 600px) {
+  .video {
+    flex-direction: column;
+  }
 
-
-
-
-
+  .video img {
+    width: 100%;
+    height: auto;
+  }
+}
