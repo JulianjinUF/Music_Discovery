@@ -22,3 +22,91 @@ button {
   padding: 8px 12px;
   cursor: pointer;
 }
+
+label {
+  margin-right: 8px;
+}
+
+form{
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+input[type="text"]{
+  flex: 1;
+}
+/* for the playlist */
+#playlist-list,
+#recent-playlist{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.playlist{
+  background-color: #9ec5ff;
+  width: 100%;
+  height: 130px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+.playlist h3 a {
+  color: white;
+  text-decoration: none;
+}
+
+/* the history */
+#history-preview,
+#history-list {
+  line-height: 2;
+  padding-left: 30px;
+}
+
+.button-link {
+  display: inline-block;
+  background-color: #1d4f9e;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  margin-bottom: 20px;
+}
+
+.button-link:hover {
+  background-color: #2a64c5;
+}
+  
+/* search results and trending (from the partner's page) */
+.video {
+  display: flex;
+  gap: 20px;
+  padding: 15px 0;
+  border-bottom: 1px solid #2a5aa8;
+}
+
+.video img {
+  width: 200px;
+  height: 112px;
+  object-fit: cover;
+}
+
+.video h3 {
+  margin-top: 0;
+}
+
+#player {
+  margin-top: 30px;
+}
+
+#player iframe {
+  width: 100%;
+  height: 450px;
+  border: none;
+}
+
+
+
+
+
+
