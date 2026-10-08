@@ -7,15 +7,23 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+
   <h1>Your Playlists</h1>
 
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="playlists.html">Playlists</a>
+    <a href="history.html">History</a>
+  </nav>
+
+  <!-- CREATE A PLAYLIST -->
   <h2>Create a Playlist</h2>
   <form action="#" method="get" id="playlist-form">
-    <label for="playlist-name">Playlist name:</label>
     <input type="text" id="playlist-name" placeholder="Enter a playlist name">
     <button type="submit">Create</button>
   </form>
 
+  <!-- PLAYLISTS -->
   <h2>Playlists Created</h2>
   <div id="playlist-list">
 
@@ -39,6 +47,13 @@
 
   </div>
 
-  <p><a href="index.html">Back to home</a></p>
+  <!-- FAVORITES -->
+  <h2>Favorites</h2>
+  <ul id="favorites-list">
+    <li>Favorite Song 1 - Artist 1</li>
+    <li>Favorite Song 2 - Artist 2</li>
+    <li>Favorite Song 3 - Artist 3</li>
+  </ul>
+
 </body>
 </html>
