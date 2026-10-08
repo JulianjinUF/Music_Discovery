@@ -127,6 +127,7 @@ function playVideo(videoId) {
 
         <iframe
             src="https://www.youtube.com/embed/${videoId}"
+            referrerpolicy="strict-origin-when-cross-origin"
             allowfullscreen>
         </iframe>
     `;
