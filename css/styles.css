@@ -44,7 +44,15 @@ input[type="text"]{
   gap: 20px;
 }
 
-.playlist{
+.playlist {
+  background-color: #1d4f9e;
+  padding: 15px;
+  border-radius: 8px;
+  width: 160px;
+  text-align: center;
+}
+
+.playlist-image {
   background-color: #9ec5ff;
   width: 100%;
   height: 130px;
